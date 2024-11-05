@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitar Cotação</title>
+    <link rel="stylesheet" href="css/arte.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Seguradora Vitalis</div>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="carrinho.html">Carrinho</a></li>
+                <li><a href="sobre.html">Quem Somos</a></li>
+                <li><a href="lojas.html">Nossas Lojas</a></li>
+                <li><a href="contatos.html">Fale Conosco</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="cotar-form">
+        <h1>Solicitar Cotação</h1>
+        <form id="cotarForm">
+            <fieldset>
+                <legend>Informações do Cliente</legend>
+
+                <div>
+                    <label for="name">Nome Completo:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div>
+                    <label for="cpf">CPF:</label>
+                    <input type="text" id="cpf" name="cpf" required>
+                </div>
+
+                <div>
+                    <label for="insurance">Escolha o Tipo de Seguro:</label>
+                    <select id="insurance" name="insurance" required>
+                        <option value="bronze">Bronze</option>
+                        <option value="prata">Prata</option>
+                        <option value="platina">Platina</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="email">E-mail:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div>
+                    <label for="phone">Telefone:</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+
+                <button type="submit">Enviar Cotação</button>
+            </fieldset>
+        </form>
+
+        <div id="successMessage" class="hidden">
+            <p>Sua cotação foi enviada com sucesso! Entraremos em contato em breve.</p>
+        </div>
+    </section>
+
+    <section class="insurance-packages">
+        <h2>Informações sobre valores por pessoa dos Pacotes</h2>
+        <div class="package">
+            <h3>Pacote Bronze R$ 250,00:</h3>
+            <p>O pacote Bronze oferece cobertura básica, ideal para quem busca um seguro acessível que cubra os principais riscos. Inclui:</p>
+            <ul>
+                <li>Quartos conjuntos em caso de internação</li>
+                <li>Atendimentos na rede de hospitais</li>
+                <li>Cobertura contra roubo e furto</li>
+                <li>Assistência 24 horas</li>
+                <li>Cobertura de responsabilidade civil</li>
+            </ul>
+        </div>
+
+        <div class="package">
+            <h3>Pacote Prata R$ 450,00:</h3>
+            <p>O pacote Prata oferece cobertura intermediária, com mais benefícios e maior cobertura que o Bronze. Inclui:</p>
+            <ul>
+                <li>Todos os benefícios do pacote Bronze</li>
+                <li>Quartos exclusivos em caso de internação, dependendo do local de escolha</li>
+                <li>Atendimentos médio na rede de hospitais</li>
+                <li>Cobertura contra danos a terceiros</li>
+                <li>Cobertura de danos naturais</li>
+                <li>Carro reserva por até 7 dias</li>
+            </ul>
+        </div>
+
+        <div class="package">
+            <h3>Pacote Platina R$ 700,00 a R$ 1.000,00:</h3>
+            <p>O pacote Platina é o mais completo, oferecendo o máximo de proteção e benefícios. Inclui:</p>
+            <ul>
+                <li>Todos os benefícios dos pacotes Bronze e Prata</li>
+                <li>Atendimento completo na rede de hospitais</li>
+                <li>Quartos exclusivos em caso de internação</li>
+                <li>Cobertura total contra acidentes</li>
+                <li>Carro reserva por até 30 dias</li>
+                <li>Cobertura internacional se desejado</li>
+            </ul>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 E-commerce Saúde. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('cotarForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+                document.getElementById('successMessage').classList.remove('hidden');
+                document.getElementById('cotarForm').reset();
+            });
+        });
+    </script>
+</body>
+</html>
