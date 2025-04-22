@@ -47,8 +47,19 @@ Basta abrir o arquivo `Home.html` no seu navegador.
 ### Página do carrinho
 ![carrinho](/Prints/carrinho.jpeg)
 
-### Página de Resultado
-![Resultado](./Prints/Resultado.jpeg)
+### Página de quem somos
+![Quem somos](/Prints/quemsomos.jpeg)
+![Quem somos](/Prints/quemsomos2.jpeg)
+
+### Página de Nossas Lojas
+
+![nossas lojas](/Prints/nossaslojas.jpeg)
+![nossas lojas](/Prints/nossaslojas2.jpeg)
+
+### Página Fale Conosco
+
+![fale conosco](/Prints/faleconosco.jpeg)
+
 
 ---
 
