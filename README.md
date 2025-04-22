@@ -38,7 +38,7 @@ Basta abrir o arquivo `Home.html` no seu navegador.
 ## 🖼️ Prévia do Projeto
 
 ### Página Inicial
-![Home](./Prints/Home.jpeg)
+![Home](../Prints/Home.jpeg)
 
 ### Página de Cotação
 ![Cotação](./Prints/Cotar.jpeg)
