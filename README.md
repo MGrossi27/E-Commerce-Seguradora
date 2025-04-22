@@ -72,4 +72,4 @@ Este é um projeto educacional. Sugestões e melhorias são bem-vindas!
 ## 📄 Licença
 
 Este projeto está licenciado sob a Licença GPL v3.  
-Veja o arquivo [LICENSE](./LICENSE) para mais informações.
+Veja o arquivo [LICENSE](/LICENSE) para mais informações.
