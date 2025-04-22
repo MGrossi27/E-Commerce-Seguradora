@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vitalis Seguradora Carrinho</title>
+    <link rel="icon" href="logo64.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/arte.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Seguradora Vitalis</div>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="carrinho.html">Carrinho</a></li>
+                <li><a href="sobre.html">Quem Somos</a></li>
+                <li><a href="lojas.html">Nossas Lojas</a></li>
+                <li><a href="contatos.html">Fale Conosco</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="cart">
+        <h1>Seu Carrinho</h1>
+        <table id="cartTable">
+            <thead>
+                <tr>
+                    <th>Produto</th>
+                    <th>Quantidade</th>
+                    <th>Preço Unitário</th>
+                    <th>Total</th>
+                    <th>Remover</th>
+                </tr>
+            </thead>
+            <tbody id="cartItems"></tbody>
+        </table>
+
+        <div class="cart-summary">
+            <h2>Total do Carrinho: <span id="cartTotal">R$ 0,00</span></h2>
+            <button id="checkoutButton">Finalizar Compra</button>
+        </div>
+    </section>
+
+    <section class="checkout-form hidden" id="checkoutForm">
+        <h2>Finalizar Pedido</h2>
+        <form id="orderForm">
+            <div>
+                <label for="name">Nome Completo:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div>
+                <label for="address">Endereço Completo:</label>
+                <input type="text" id="address" name="address" required>
+            </div>
+            <div>
+                <label for="CEP">CEP:</label>
+                <input type="text" id="CEP" name="CEP" required>
+            </div>
+            <div>
+                <label for="phone">Telefone:</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="Email" name="Email" required>
+            </div>
+            <div>
+                <label for="payment">Forma de Pagamento:</label>
+                <select id="payment" name="payment" required>
+                    <option value="boleto">Boleto Bancário</option>
+                    <option value="pix">Pix</option>
+                    <option value="debit_card">Cartão de Débito</option>
+                    <option value="credit_card">Cartão de Crédito</option>
+                </select>
+            </div>
+
+            <div id="cardDetails" class="hidden">
+                <div>
+                    <label for="cardNumber">Número do Cartão:</label>
+                    <input type="text" id="cardNumber" name="cardNumber" maxlength="16" placeholder="1234 5678 9012 3456">
+                </div>
+                <div>
+                    <label for="cardExpiry">Validade (MM/AA):</label>
+                    <input type="text" id="cardExpiry" name="cardExpiry" maxlength="5" placeholder="MM/AA">
+                </div>
+                <div>
+                    <label for="cardCVC">Código de Segurança (CVC):</label>
+                    <input type="text" id="cardCVC" name="cardCVC" maxlength="3" placeholder="123">
+                </div>
+                
+                <div id="installments" class="hidden">
+                    <label for="installmentOptions">Número de Parcelas:</label>
+                    <select id="installmentOptions" name="installmentOptions">
+                        <option value="1">1x sem juros</option>
+                        <option value="2">2x sem juros</option>
+                        <option value="3">3x sem juros</option>
+                        <option value="4">4x sem juros</option>
+                        <option value="5">5x com juros</option>
+                        <option value="6">6x com juros</option>
+                        <option value="12">12x com juros</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit">Confirmar Pedido</button>
+        </form>
+    </section>
+    
+    <div id="checkoutSuccess" class="hidden">
+        <p>As informações sobre sua compra foram enviadas por E-mail, Agradecemos pela preferência.</p>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 E-commerce Saúde. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        function addToCart(productName, price) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const existingProduct = cart.find(item => item.name === productName);
+
+            if (existingProduct) {
+                existingProduct.quantity += 1;
+            } else {
+                cart.push({
+                    name: productName,
+                    price: price,
+                    quantity: 1
+                });
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            alert(`${productName} foi adicionado ao carrinho!`);
+        }
+
+        function loadCart() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartItems = document.getElementById('cartItems');
+            cartItems.innerHTML = '';
+
+            let total = 0;
+
+            cart.forEach((product, index) => {
+                const productTotal = product.price * product.quantity;
+                total += productTotal;
+
+                const row = `
+                    <tr>
+                        <td>${product.name}</td>
+                        <td><input type="number" value="${product.quantity}" min="1" onchange="updateQuantity(${index}, this.value)"></td>
+                        <td>R$ ${product.price.toFixed(2).replace('.', ',')}</td>
+                        <td class="product-total">R$ ${productTotal.toFixed(2).replace('.', ',')}</td>
+                        <td><button onclick="removeProduct(${index})">Remover</button></td>
+                    </tr>
+                `;
+                cartItems.insertAdjacentHTML('beforeend', row);
+            });
+
+            document.getElementById('cartTotal').innerText = 'R$ ' + total.toFixed(2).replace('.', ',');
+        }
+
+        function updateQuantity(index, newQuantity) {
+            let cart = JSON.parse(localStorage.getItem('cart'));
+            cart[index].quantity = parseInt(newQuantity);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            loadCart(); 
+        }
+
+        function removeProduct(index) {
+            let cart = JSON.parse(localStorage.getItem('cart'));
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            loadCart();
+        }
+
+        document.getElementById('checkoutButton').addEventListener('click', function() {
+            document.querySelector('.cart').classList.add('hidden'); 
+            document.getElementById('checkoutForm').classList.remove('hidden');
+        });
+
+        document.getElementById('payment').addEventListener('change', function() {
+            const paymentMethod = this.value;
+            const cardDetails = document.getElementById('cardDetails');
+            const installments = document.getElementById('installments');
+
+            if (paymentMethod === 'credit_card') {
+                cardDetails.classList.remove('hidden');
+                installments.classList.remove('hidden');
+            } else if (paymentMethod === 'debit_card') {
+                cardDetails.classList.remove('hidden'); 
+                installments.classList.add('hidden'); 
+            } else {
+                cardDetails.classList.add('hidden'); 
+                installments.classList.add('hidden'); 
+            }
+        });
+
+        document.getElementById('orderForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const address = document.getElementById('address').value;
+            const phone = document.getElementById('phone').value;
+            const payment = document.getElementById('payment').value;
+
+            if (payment === 'credit_card' || payment === 'debit_card') {
+                const cardNumber = document.getElementById('cardNumber').value;
+                const cardExpiry = document.getElementById('cardExpiry').value;
+                const cardCVC = document.getElementById('cardCVC').value;
+
+                if (!cardNumber || !cardExpiry || !cardCVC) {
+                    alert("Por favor, preencha todas as informações do cartão.");
+                    return;
+                }
+
+                if (payment === 'credit_card') {
+                    const installment = document.getElementById('installmentOptions').value;
+                    console.log(`Parcelado em ${installment}x.`);
+                }
+
+                console.log(`Dados do cartão:
+                Número: ${cardNumber}
+                Validade: ${cardExpiry}
+                CVC: ${cardCVC}`);
+            }
+
+            if (name && address && phone && payment) {
+                document.getElementById('checkoutForm').classList.add('hidden');
+                document.getElementById('checkoutSuccess').classList.remove('hidden');
+                localStorage.removeItem('cart');
+            } else {
+                alert("Por favor, preencha todas as informações.");
+            }
+        });
+
+        loadCart();
+    </script>
+</body>
+</html>

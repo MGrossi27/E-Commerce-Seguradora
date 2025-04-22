@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vitalis Seguradora</title>
+    <link rel="icon" href="logo64.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/arte.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Seguradora Vitalis</div>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="carrinho.html">Carrinho</a></li>
+                <li><a href="sobre.html">Quem Somos</a></li>
+                <li><a href="lojas.html">Nossas Lojas</a></li>
+                <li><a href="contatos.html">Fale Conosco</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="banner">
+        <div class="banner-content">
+            <h1>Do básico ao mais completo</h1>
+            <p>Conte com as melhores opções de planos de saúde, escolha do bronze ao platina. Para tabelas de preços e mais informações.</p>
+            <button onclick="window.location.href='cotar.html'">Clique aqui.</button>
+        </div>
+        <div class="banner-image">
+            <img src="familia.png">
+        </div>
+    </section>
+    <section class="products">
+        <h2>Contrate nossos serviços</h2>
+        <div class="product-carousel">
+            <div class="product-container">
+                <div class="product-item">
+                    <img src="produto.png" alt="Produto 1">
+                    <h3>Serviços residenciais</h3>
+                    <p>Assistência 24hrs de manutenção para sua casa.</p>
+                    <button onclick="addToCart('Serviços residenciais', 200)">Adicionar ao Carrinho</button>
+                </div>
+                <div class="product-item">
+                    <img src="produto4.png" alt="Produto 4">
+                    <h3>Seguro Viagem</h3>
+                    <p>Tranquilidade para a sua mala em sua viagem.</p>
+                    <button onclick="addToCart('Seguro Viagem', 300)">Adicionar ao Carrinho</button>
+                </div>               
+                <div class="product-item">
+                    <img src="produto3.png" alt="Produto 3">
+                    <h3>Seguro de vida</h3>
+                    <p>Benefícios para usar em vida.</p>
+                    <button onclick="addToCart('Seguro de vida', 250)">Adicionar ao Carrinho</button>
+                </div>
+                <div class="product-item">
+                    <img src="produto2.png" alt="Produto 2">
+                    <h3>Serviço para seu Automóvel</h3>
+                    <p>Guincho 24hrs em qualquer lugar.</p>
+                    <button onclick="addToCart('Serviço para seu Automóvel', 150)">Adicionar ao Carrinho</button>
+                </div>
+                <div class="product-item">
+                    <img src="produto5.png" alt="Produto 5">
+                    <h3>Seguro Celular</h3>
+                    <p>Seu celular protegido e livre de gambiarras.</p>
+                    <button onclick="addToCart('Seguro celular', 350)">Adicionar ao Carrinho</button>
+                </div>
+                <div class="product-item">
+                    <img src="produto6.png" alt="Produto 6">
+                    <h3>Seguro Pet</h3>
+                    <p>Todo cuidado para o seu amado bichinho.</p>
+                    <button onclick="addToCart('Seguro Pet', 150)">Adicionar ao Carrinho</button>
+                </div>
+            </div>
+        </div>
+        <button class="prev-btn">&#10094;</button>
+        <button class="next-btn">&#10095;</button>
+    </section>
+    <footer>
+        <p>&copy; 2024 E-commerce Saúde. Todos os direitos reservados.</p>
+    </footer>
+    <script>
+        let currentIndex = 0;
+        const productContainer = document.querySelector('.product-container');
+        const nextBtn = document.querySelector('.next-btn');
+        const prevBtn = document.querySelector('.prev-btn');
+        const productWidth = 220;
+
+        nextBtn.addEventListener('click', () => {
+            const maxScroll = productContainer.scrollWidth - productContainer.clientWidth;
+            currentIndex += productWidth;
+            if (currentIndex > maxScroll) {
+                currentIndex = 0;
+            }
+            productContainer.style.transform = `translateX(-${currentIndex}px)`;
+        });
+
+        prevBtn.addEventListener('click', () => {
+            currentIndex -= productWidth;
+            if (currentIndex < 0) {
+                currentIndex = 0;
+            }
+            productContainer.style.transform = `translateX(-${currentIndex}px)`;
+        });
+        function addToCart(productName, price) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const existingProduct = cart.find(item => item.name === productName);
+
+            if (existingProduct) {
+                existingProduct.quantity += 1;
+            } else {
+                cart.push({
+                    name: productName,
+                    price: price,
+                    quantity: 1
+                });
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(`${productName} foi adicionado ao carrinho!`);
+        }
+    </script>
+</body>
+</html>
