@@ -41,7 +41,8 @@ Basta abrir o arquivo `Home.html` no seu navegador.
 ![Home](/Prints/home.jpeg)
 
 ### Página de Cotação
-![Cotação](./Prints/Cotar.jpeg)
+![Cotação](/Prints/Cotação.jpeg)
+
 
 ### Página de Resultado
 ![Resultado](./Prints/Resultado.jpeg)
