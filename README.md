@@ -41,8 +41,11 @@ Basta abrir o arquivo `Home.html` no seu navegador.
 ![Home](/Prints/home.jpeg)
 
 ### Página de Cotação
-![Cotação](/Prints/Cotação.jpeg)
+![Cotação](/Prints/cotação.jpeg)
+![Cotação](/Prints/infocotar.jpeg)
 
+### Página do carrinho
+![carrinho](/Prints/carrinho.jpeg)
 
 ### Página de Resultado
 ![Resultado](./Prints/Resultado.jpeg)
