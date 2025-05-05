@@ -8,7 +8,7 @@ Projeto de e-commerce voltado para a simulação de contratação de seguros, de
 
 - HTML
 - CSS
-
+- PHP
 ---
 
 ## ⚙️ Funcionalidades
